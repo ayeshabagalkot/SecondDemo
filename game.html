@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Ball Game</title>
+  <style>
+    body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f1f1f1;
+}
+
+.game-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  background-color: #fafafa;
+  border: 2px solid #333;
+  overflow: hidden;
+}
+
+.ball {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #eebdeb;
+  top: 225px;
+  left: 225px;
+}
+
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <div class="ball" id="ball"></div>
+  </div>
+
+  <script>
+    // Ball movement speed
+const speed = 5;
+
+// Get the ball and game container
+const ball = document.getElementById('ball');
+const gameContainer = document.querySelector('.game-container');
+
+// Starting position of the ball
+let ballX = 225;
+let ballY = 225;
+
+// Ball movement delta
+let deltaX = 0;
+let deltaY = 0;
+
+// Handle key press to move the ball
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowUp') {
+    deltaY = -speed;
+    deltaX = 0;
+  } else if (e.key === 'ArrowDown') {
+    deltaY = speed;
+    deltaX = 0;
+  } else if (e.key === 'ArrowLeft') {
+    deltaX = -speed;
+    deltaY = 0;
+  } else if (e.key === 'ArrowRight') {
+    deltaX = speed;
+    deltaY = 0;
+  }
+});
+
+// Game loop to update ball position
+function gameLoop() {
+  // Update ball position
+  ballX += deltaX;
+  ballY += deltaY;
+
+  // Keep the ball within the game container bounds
+  if (ballX < 0) ballX = 0;
+  if (ballY < 0) ballY = 0;
+  if (ballX + 50 > gameContainer.clientWidth) ballX = gameContainer.clientWidth - 50;
+  if (ballY + 50 > gameContainer.clientHeight) ballY = gameContainer.clientHeight - 50;
+
+  // Apply the new position
+  ball.style.left = `${ballX}px`;
+  ball.style.top = `${ballY}px`;
+
+  // Keep the game loop running
+  requestAnimationFrame(gameLoop);
+}
+
+// Start the game loop
+gameLoop();
+
+  </script>
+</body>
+</html>
