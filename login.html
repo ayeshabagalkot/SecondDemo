@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Login</title>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f3f4f6; /* Light pastel gray background */
+}
+
+.login-container {
+  background-color: #fff9f2; /* Soft pastel peach background */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 350px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #6c5b7b; /* Muted pastel purple */
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-size: 14px;
+  color: #6c5b7b; /* Muted pastel purple */
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #d4c7f5; /* Soft pastel lavender border */
+  background-color: #f9f0ff; /* Light pastel lavender input background */
+  color: #6c5b7b;
+}
+
+input:focus {
+  outline-color: #f4a1c1; /* Pastel pink outline */
+  border-color: #f4a1c1; /* Pastel pink border on focus */
+}
+
+small {
+  color: #f4a1c1; /* Soft pastel pink for error messages */
+  font-size: 12px;
+  visibility: hidden;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffb6b9; /* Pastel pink button */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff9aa2; /* Lighter pastel pink on hover */
+}
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Student Login</h2>
+    <form id="loginForm" onsubmit="return validateForm()">
+      <div class="input-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter your username">
+        <small id="usernameError"></small>
+      </div>
+      <div class="input-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password">
+        <small id="passwordError"></small>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    function validateForm() {
+  // Get values from the form
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  // Get error elements
+  const usernameError = document.getElementById('usernameError');
+  const passwordError = document.getElementById('passwordError');
+
+  let valid = true;
+
+  // Clear previous error messages
+  usernameError.style.visibility = 'hidden';
+  passwordError.style.visibility = 'hidden';
+
+  // Validate username
+  if (username.trim() === '') {
+    usernameError.textContent = 'Username is required';
+    usernameError.style.visibility = 'visible';
+    valid = false;
+  }
+
+  // Validate password
+  if (password.trim() === '') {
+    passwordError.textContent = 'Password is required';
+    passwordError.style.visibility = 'visible';
+    valid = false;
+  }
+
+  return valid;
+}
+
+  </script>
+</body>
+</html>
